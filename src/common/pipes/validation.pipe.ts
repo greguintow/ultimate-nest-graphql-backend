@@ -1,4 +1,4 @@
-import { ValidationPipe as NestValidationPipe, ArgumentMetadata } from '@nestjs/common'
+import { ValidationPipe as NestValidationPipe } from '@nestjs/common'
 import { InvalidArgumentsError } from '@common/errors'
 
 export class ValidationPipe extends NestValidationPipe {
@@ -20,11 +20,5 @@ export class ValidationPipe extends NestValidationPipe {
         })
       }
     })
-  }
-
-  public async transform(value: any, metadata: ArgumentMetadata) {
-    await super.transform(value, metadata)
-
-    return value
   }
 }
