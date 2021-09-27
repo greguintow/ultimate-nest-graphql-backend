@@ -12,7 +12,7 @@ export interface GetUserFromTokenResponse {
 export class AuthService {
   constructor(private readonly jwtService: JwtService) {}
 
-  generateUserToken(user: User) {
+  generateUserToken(user: User): string {
     const token = this.jwtService.sign(
       {
         id: user.id,
@@ -36,7 +36,7 @@ export class AuthService {
     }
     try {
       const user = this.jwtService.verify(token)
-      return { user: user ?? null, isTokenInvalid: false }
+      return { user, isTokenInvalid: false }
     } catch (err) {
       return { user: null, isTokenInvalid: true }
     }
@@ -46,14 +46,14 @@ export class AuthService {
     try {
       if (!authHeader) return null
       const token = this.getBearerToken(authHeader)
-      return token
+      return token ?? null
     } catch {
       return null
     }
   }
 
-  getBearerToken(authHeader: string | string[]): string {
-    return authHeader?.toString().split('Bearer ')[1]
+  getBearerToken(authHeader: string | string[]): string | undefined {
+    return authHeader.toString().split('Bearer ')[1]
   }
 
   getTokenFromHeader(authHeader: string | string[] | undefined): GetUserFromTokenResponse {
