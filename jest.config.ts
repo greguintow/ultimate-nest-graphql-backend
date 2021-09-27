@@ -19,7 +19,8 @@ export default {
     '.event.ts',
     '.dto.ts',
     '.query.ts',
-    '.error.ts'
+    '.error.ts',
+    '.model.ts'
   ],
   testEnvironment: 'node',
   collectCoverage: true,
