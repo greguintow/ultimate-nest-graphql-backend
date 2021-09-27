@@ -848,7 +848,7 @@
     consola "^2.15.0"
     node-fetch "^2.6.1"
 
-"@prisma/client@^3.1.1":
+"@prisma/client@^3.0.1":
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/@prisma/client/-/client-3.1.1.tgz#f4012631528049c22d12b212846dcf503db33cfe"
   integrity sha512-8ud8vVFMIg37yrkZ4wPpjKoMxFbCL0Pesq5eyLnag/s0LTKsVEN7ZBIQq9JzWW+AUqOzGKXr2Jt4Sl8xdGI99w==
@@ -1097,6 +1097,21 @@
   integrity sha512-c3mAZEuK0lvBp8tmuL74XRKn1+y2dcwOUpH7x4WrF6gk1GIgiluDRgMYQtw2OFcBvAJWlt6ASU3tSqxp0Uu0Aw==
   dependencies:
     "@types/istanbul-lib-report" "*"
+
+"@types/jest-when@^2.7.3":
+  version "2.7.3"
+  resolved "https://registry.yarnpkg.com/@types/jest-when/-/jest-when-2.7.3.tgz#40735b320d8655ebff01123cb58afbdaf8274658"
+  integrity sha512-BdDZnKj3ZO1VsRlJFyRx6yLa0hG9++qetnBKhESjCGRVAm6S4aaKXXLm9xGFmtAQpzuMC44wxhvkG2cl6axvyQ==
+  dependencies:
+    "@types/jest" "*"
+
+"@types/jest@*":
+  version "27.0.2"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-27.0.2.tgz#ac383c4d4aaddd29bbf2b916d8d105c304a5fcd7"
+  integrity sha512-4dRxkS/AFX0c5XW6IPMNOydLn2tEhNhJV7DnYK+0bjoJZ+QTmfucBlihX7aoEsh/ocYtkLC73UbnBXBXIxsULA==
+  dependencies:
+    jest-diff "^27.0.0"
+    pretty-format "^27.0.0"
 
 "@types/jest@^27.0.1":
   version "27.0.1"
@@ -4020,6 +4035,11 @@ jest-watcher@^27.1.0:
     chalk "^4.0.0"
     jest-util "^27.1.0"
     string-length "^4.0.1"
+
+jest-when@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/jest-when/-/jest-when-3.4.0.tgz#2f78b80371cb2920067cb4cf8d88ee009a5dabd8"
+  integrity sha512-c7cj+uwoqik7w+CDpsKb5B5A7DhDU6MN9/KcXC+K4WdZHyAdV8zWWy7F+M42TYcQIgQNI2iRtFIf0zXUmVBSOQ==
 
 jest-worker@^27.0.6, jest-worker@^27.1.0:
   version "27.1.0"
