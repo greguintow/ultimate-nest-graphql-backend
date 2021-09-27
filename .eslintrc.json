@@ -20,7 +20,7 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": ["import", "prettier", "@typescript-eslint", "jest", "decorator-position"],
+  "plugins": ["import", "prettier", "@typescript-eslint", "jest"],
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts"]
