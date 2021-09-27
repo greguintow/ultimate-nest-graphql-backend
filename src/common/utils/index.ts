@@ -1,4 +1,3 @@
-export * from './graphql.util'
 export * from './function.util'
 export * from './regexps.util'
 export * from './test.util'

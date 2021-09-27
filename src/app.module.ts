@@ -1,7 +1,6 @@
 import path from 'path'
 import { Module } from '@nestjs/common'
 import { GraphQLModule } from '@nestjs/graphql'
-import { JwtService } from '@nestjs/jwt'
 import { APP_FILTER } from '@nestjs/core'
 import { ExpressContext } from 'apollo-server-express'
 import { GraphQLRequestContext } from 'apollo-server-core'
@@ -15,7 +14,7 @@ import {
   setI18nGlobalOptions
 } from 'nestjs-i18n'
 import { AUTH_HEADER, IN_PROD } from '@common/constants/config'
-import { formatError, getUserConnection, verifyToken } from '@common/utils'
+import { formatError } from '@common/utils'
 import { Context } from '@common/types'
 import { DomainErrorFilter } from '@common/filters'
 import { InvalidArgumentsError } from '@common/errors'
@@ -23,6 +22,7 @@ import { CqrsModule } from '@modules/cqrs'
 import { PrismaModule } from '@modules/prisma'
 import { UserModule } from '@modules/users'
 import { ServicesModule } from '@modules/services'
+import { AuthService } from '@modules/users/services'
 
 setI18nGlobalOptions({
   method: 'middleware'
@@ -54,13 +54,13 @@ setI18nGlobalOptions({
       ]
     }),
     GraphQLModule.forRootAsync({
-      useFactory: async (jwtService: JwtService, i18nService: I18nService) => {
+      imports: [UserModule],
+      useFactory: async (authService: AuthService, i18nService: I18nService) => {
         return {
           cors: true,
           autoSchemaFile: true,
           context: (args: ExpressContext) => {
-            const token = getUserConnection(args.req.headers[AUTH_HEADER])
-            const values = verifyToken(jwtService, token)
+            const values = authService.getTokenFromHeader(args.req.headers[AUTH_HEADER])
             return {
               ...args,
               ...values
@@ -186,7 +186,7 @@ setI18nGlobalOptions({
           }
         }
       },
-      inject: [JwtService, I18nService]
+      inject: [AuthService, I18nService]
     })
   ],
   providers: [

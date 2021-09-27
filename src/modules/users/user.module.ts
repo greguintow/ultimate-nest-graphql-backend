@@ -5,6 +5,7 @@ import { UserRepository } from './repositories'
 import { CommandHandlers } from './cqrs'
 
 @Module({
-  providers: [UserRepository, AuthService, UserService, UserResolver, ...CommandHandlers]
+  providers: [UserRepository, AuthService, UserService, UserResolver, ...CommandHandlers],
+  exports: [AuthService]
 })
 export class UserModule {}
