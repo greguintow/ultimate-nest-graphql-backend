@@ -6,12 +6,14 @@ import { DomainErrorFilter } from '../domain-error.filter'
 describe('DomainErrorFilter', () => {
   const domainErrorFilter = new DomainErrorFilter()
 
-  it('should return domain error', () => {
-    const host = createMock<ArgumentsHost>()
-    host.getType.mockReturnValue('graphql')
-    host.getArgs.mockReturnValue([])
-    const error = domainErrorFilter.catch(new UnauthenticatedError(), host)
+  describe('catch', () => {
+    it('should return domain error', () => {
+      const host = createMock<ArgumentsHost>()
+      host.getType.mockReturnValue('graphql')
+      host.getArgs.mockReturnValue([])
+      const error = domainErrorFilter.catch(new UnauthenticatedError(), host)
 
-    expect(error).toBeInstanceOf(UnauthenticatedError)
+      expect(error).toBeInstanceOf(UnauthenticatedError)
+    })
   })
 })

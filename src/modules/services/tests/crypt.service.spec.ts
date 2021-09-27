@@ -21,8 +21,8 @@ describe('CryptService', () => {
     expect(cryptService).toBeDefined()
   })
 
-  describe('execute', () => {
-    it('should encrypt string', async () => {
+  describe('encrypt', () => {
+    it('should encrypt string successfully', async () => {
       const str = faker.internet.password()
       const hashedStr = faker.datatype.string()
 
@@ -33,8 +33,10 @@ describe('CryptService', () => {
       expect(response).toBeDefined()
       expect(response).toEqual(hashedStr)
     })
+  })
 
-    it('should compare string', async () => {
+  describe('compare', () => {
+    it('should compare string successfully', async () => {
       const str = faker.internet.password()
       const hashedStr = faker.datatype.string()
 
