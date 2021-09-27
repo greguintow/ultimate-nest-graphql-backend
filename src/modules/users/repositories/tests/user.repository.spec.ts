@@ -1,6 +1,7 @@
 import { Test } from '@nestjs/testing'
 import faker from 'faker'
-import { PrismaService, User as PrismaUser } from '@modules/prisma'
+import { createMock } from '@golevelup/nestjs-testing'
+import { PrismaService, User as PrismaUser, Prisma } from '@modules/prisma'
 import { CreateUserInput } from '@modules/users/types'
 import { User } from '@modules/users/models'
 import { UserRepository } from '../user.repository'
@@ -33,11 +34,7 @@ describe('UserRepository', () => {
         {
           provide: PrismaService,
           useValue: {
-            user: {
-              create: jest.fn(),
-              count: jest.fn(),
-              findUnique: jest.fn()
-            }
+            user: createMock<Prisma.UserDelegate<'rejectOnNotFound'>>()
           }
         }
       ]
