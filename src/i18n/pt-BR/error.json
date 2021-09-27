@@ -1,0 +1,13 @@
+{
+  "DEFAULT_MESSAGE": "Algo inesperado aconteceu. Por favor tente novamente",
+  "object_already_exists": "Já existe um \"{objectType}\" com o campo \"{field}\"",
+  "invalid_arguments": "Argumentos inválidos foram recebidos.",
+  "email_in_use": "Esse email já está em uso",
+  "invalid_password_format": "A senha deve ter pelo menos 8 caracteres e pelo menos um símbolo, número, letra maiúscula e minúscula",
+  "auth_invalid": "O email e/ou senha usados para logar são inválidos",
+  "account_not_found": "Nenhuma conta foi encontrada com esse email",
+  "invalid_password": "Senha inválida",
+  "unauthenticated": "Você precisa estar autenticado para realizar essa operação",
+  "invalid_token": "O token recebido é inválido",
+  "forbidden": "Você não está autorizado para realizar essa ação"
+}
