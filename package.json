@@ -21,7 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prisma:generate": "prisma generate",
     "studio": "prisma studio",
-    "db:migrate": "prisma migrate dev --preview-feature",
+    "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy"
   },
   "dependencies": {
@@ -67,7 +67,7 @@
     "git-commit-msg-linter": "^3.1.0",
     "jest": "27.1.0",
     "prettier": "^2.3.2",
-    "prisma": "^3.0.1",
+    "prisma": "^3.1.1",
     "supertest": "^6.1.3",
     "ts-jest": "^27.0.3",
     "ts-loader": "^9.2.3",
