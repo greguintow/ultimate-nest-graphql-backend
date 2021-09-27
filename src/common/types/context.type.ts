@@ -3,6 +3,7 @@ import { Request } from 'express'
 
 export enum Role {
   USER = 'USER',
+  // only for test purposes, shouldn't be used
   OTHER = 'OTHER'
 }
 
