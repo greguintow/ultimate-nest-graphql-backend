@@ -34,8 +34,10 @@ export async function formatError({
               return {
                 ...field,
                 message: await Promise.all(
-                  field.message.map(
-                    async message => (await translate(`error.${message}`)) || message
+                  field.message.map(async message =>
+                    message.includes(' ')
+                      ? message
+                      : (await translate(`error.${message}`)) || message
                   )
                 )
               }

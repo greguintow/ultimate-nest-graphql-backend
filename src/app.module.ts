@@ -18,6 +18,7 @@ import { AUTH_HEADER, IN_PROD } from '@common/constants/config'
 import { formatError, getUserConnection, verifyToken } from '@common/utils'
 import { Context } from '@common/types'
 import { DomainErrorFilter } from '@common/filters'
+import { InvalidArgumentsError } from '@common/errors'
 import { CqrsModule } from '@modules/cqrs'
 import { PrismaModule } from '@modules/prisma'
 import { UserModule } from '@modules/users'
@@ -83,17 +84,6 @@ setI18nGlobalOptions({
               }
             }
 
-            const { code, metadata, name, stacktrace } = error.extensions.exception
-
-            if (!code || !name) {
-              return {
-                message: defaultMessage,
-                extensions: {
-                  stacktrace
-                }
-              }
-            }
-
             const translate = async (
               key: string,
               args?: Record<string, any>
@@ -104,6 +94,75 @@ setI18nGlobalOptions({
               })
               message = message !== key ? message : undefined
               return message
+            }
+
+            if (error.extensions.code === 'GRAPHQL_VALIDATION_FAILED') {
+              const { locations } = error
+              if (locations) {
+                const [{ line, column }] = locations
+                const sourceLine = requestContext?.source?.split('\n')[line - 1] as string
+                let foundColon = 0
+                let foundChar = -1
+                for (let i = column - 2; i > 0; i--) {
+                  const element = sourceLine[i]
+                  if (element === ':') {
+                    foundColon = i
+                  }
+                  if (i < foundColon && element !== ' ') {
+                    foundChar = i + 1
+                    break
+                  }
+                }
+                if (foundChar > -1) {
+                  const fieldArr = sourceLine.slice(0, foundChar).split(' ')
+                  const field = fieldArr[fieldArr.length - 1].match(/[A-Za-z0-9]+/g)?.[0]
+                  if (field) {
+                    const expectedType = error.message.split(' ')[0]
+                    const message = [
+                      await translate(`error.invalid_${expectedType.toLowerCase()}`)
+                    ].filter(Boolean) as string[]
+
+                    const formattedError = await formatError({
+                      error: new InvalidArgumentsError({
+                        fields: [
+                          {
+                            name: field,
+                            constraints: [],
+                            message
+                          }
+                        ]
+                      }),
+                      translate
+                    })
+                    return {
+                      message: formattedError.message,
+                      extensions: {
+                        code: formattedError.code,
+                        metadata: formattedError.metadata,
+                        stacktrace: error.extensions.exception.stacktrace
+                      }
+                    }
+                  }
+                }
+              }
+
+              return {
+                message: defaultMessage,
+                extensions: {
+                  stacktrace: error.extensions.exception.stacktrace
+                }
+              }
+            }
+
+            const { code, metadata, name, stacktrace } = error.extensions.exception
+
+            if (!code || !name) {
+              return {
+                message: defaultMessage,
+                extensions: {
+                  stacktrace
+                }
+              }
             }
 
             const formattedError = await formatError({

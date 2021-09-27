@@ -1,7 +1,7 @@
 {
   "DEFAULT_MESSAGE": "Something unexpected happened. Please try again",
   "object_already_exists": "The {objectType} with its specified {field} already exists",
-  "invalid_arguments": "Invalid argument(s) were provide.",
+  "invalid_arguments": "Invalid argument(s) were provided",
   "email_in_use": "This email is already in use",
   "invalid_password_format": "Password should have at least 8 characters and at least one symbol, number, uppercase and lowercase char",
   "auth_invalid": "The email and/or password used for authentication are invalid",
@@ -9,5 +9,9 @@
   "invalid_password": "Password invalid",
   "unauthenticated": "You need to be authenticated to perform this action",
   "invalid_token": "The provided token is invalid",
-  "forbidden": "You are not authorized to perform this action"
+  "forbidden": "You are not authorized to perform this action",
+  "invalid_string": "Must be a string",
+  "invalid_float": "Must be a float",
+  "invalid_int": "Must be an integer",
+  "invalid_boolean": "Must be a boolean"
 }
