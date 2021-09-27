@@ -1,10 +1,14 @@
 import { Inject, Injectable, Type } from '@nestjs/common'
+import { plainToClass } from 'class-transformer'
 import { AllPrismaModels, AllPrismaWhereInput, PrismaTables } from '@common/types'
 import { PrismaService } from '@modules/prisma'
 import { BaseRepository } from './base-repository.class'
 
 @Injectable()
-export class BaseRepositoryPrisma<T, U extends PrismaTables> extends BaseRepository<T> {
+export abstract class BaseRepositoryPrisma<
+  T,
+  U extends PrismaTables
+> extends BaseRepository<T> {
   @Inject()
   protected readonly prismaService: PrismaService
 
@@ -23,8 +27,7 @@ export class BaseRepositoryPrisma<T, U extends PrismaTables> extends BaseReposit
     if (!obj) {
       return null as V extends null ? null : T
     }
-    const formatted = new this.Model()
-    Object.assign(formatted, obj)
-    return formatted as V extends null ? null : T
+
+    return plainToClass(this.Model, obj) as V extends null ? null : T
   }
 }

@@ -8,7 +8,7 @@ interface CreatePaginatedListPayload<T> {
   data: T[]
 }
 
-export class BaseRepository<T> {
+export abstract class BaseRepository<T> {
   protected defaultPage = 1
 
   protected defaultPageSize = 10
