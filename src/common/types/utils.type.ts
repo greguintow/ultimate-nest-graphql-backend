@@ -27,7 +27,6 @@ export type PrismaTables = keyof GetDelegate<PrismaClient>
 
 export type GetModelType<T extends PrismaTables> = ReturnType<
   PrismaClient[T]['create']
-  // eslint-disable-next-line camelcase
 > extends Prisma.Prisma__UserClient<infer U>
   ? U
   : never
