@@ -1,1 +1,1 @@
-export * from './user-repository.type'
+export * from './user.repository.type'
