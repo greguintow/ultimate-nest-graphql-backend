@@ -1,6 +1,9 @@
 import { Test } from '@nestjs/testing'
 import faker from 'faker'
+import bcrypt from 'bcryptjs'
 import { CryptService } from '../crypt.service'
+
+const hashedStr = faker.datatype.string()
 
 describe('CryptService', () => {
   let cryptService: CryptService
@@ -13,10 +16,6 @@ describe('CryptService', () => {
     cryptService = await module.get(CryptService)
   })
 
-  afterEach(() => {
-    jest.resetAllMocks()
-  })
-
   it('should be defined', () => {
     expect(cryptService).toBeDefined()
   })
@@ -24,28 +23,26 @@ describe('CryptService', () => {
   describe('encrypt', () => {
     it('should encrypt string successfully', async () => {
       const str = faker.internet.password()
-      const hashedStr = faker.datatype.string()
 
-      jest.spyOn(cryptService, 'encrypt').mockResolvedValueOnce(hashedStr)
+      jest.spyOn(bcrypt, 'hash').mockImplementationOnce(async () => hashedStr)
+      jest.spyOn(bcrypt, 'genSalt')
 
       const response = await cryptService.encrypt(str)
 
-      expect(response).toBeDefined()
       expect(response).toEqual(hashedStr)
+      expect(bcrypt.genSalt).toBeCalledWith(5)
     })
   })
 
   describe('compare', () => {
     it('should compare string successfully', async () => {
       const str = faker.internet.password()
-      const hashedStr = faker.datatype.string()
 
-      jest.spyOn(cryptService, 'compare').mockResolvedValueOnce(true)
+      jest.spyOn(bcrypt, 'compare').mockImplementationOnce(async () => true)
 
       const response = await cryptService.compare(str, hashedStr)
 
-      expect(response).toBeDefined()
-      expect(response).toBeTruthy()
+      expect(response).toBe(true)
     })
   })
 })
