@@ -18,11 +18,10 @@ import { formatError } from '@common/utils'
 import { Context } from '@common/types'
 import { DomainErrorFilter } from '@common/filters'
 import { InvalidArgumentsError } from '@common/errors'
-import { CqrsModule } from '@modules/cqrs'
 import { PrismaModule } from '@modules/prisma'
 import { UserModule } from '@modules/users'
-import { ServicesModule } from '@modules/services'
 import { AuthService } from '@modules/users/services'
+import { GlobalConfigModule } from '@modules/global-configs'
 
 setI18nGlobalOptions({
   method: 'middleware'
@@ -30,9 +29,8 @@ setI18nGlobalOptions({
 
 @Module({
   imports: [
-    CqrsModule,
+    GlobalConfigModule,
     PrismaModule,
-    ServicesModule,
     UserModule,
     I18nModule.forRoot({
       fallbackLanguage: 'en',

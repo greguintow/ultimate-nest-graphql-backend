@@ -2,7 +2,7 @@ import { JwtService } from '@nestjs/jwt'
 import { Test } from '@nestjs/testing'
 import { createTestUser } from '@common/utils'
 import { JUser, Role } from '@common/types'
-import { jwtModule } from '@modules/services'
+import { jwtModule } from '@modules/global-configs'
 import { AuthService } from '../auth.service'
 
 describe('AuthService', () => {

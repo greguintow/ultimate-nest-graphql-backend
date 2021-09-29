@@ -1,6 +1,6 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs'
 import { AuthInvalidError } from '@common/errors'
-import { CryptService } from '@modules/services'
+import { CryptService } from '@modules/global-configs'
 import { UserLogin } from '@modules/users/models'
 import { UserRepository } from '@modules/users/repositories'
 import { AuthService } from '@modules/users/services/auth.service'
