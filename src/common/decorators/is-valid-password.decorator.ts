@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { applyDecorators } from '@nestjs/common'
 import { IsString, Matches } from 'class-validator'
 import { ErrorCode } from '@common/types'

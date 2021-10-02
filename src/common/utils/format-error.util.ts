@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { AllErrors } from '@common/errors'
 
 type Errors = AllErrors[keyof AllErrors]

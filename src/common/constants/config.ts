@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 export const { PORT, HOST, SECRET = 'secret123', NODE_ENV = 'dev' } = process.env
 export const AUTH_HEADER = 'authorization'
 export const APP_URL = `http://${HOST}:${PORT}`

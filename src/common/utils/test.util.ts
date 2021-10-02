@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { ROUTE_ARGS_METADATA } from '@nestjs/common/constants'
 import faker from 'faker'
 import { plainToClass } from 'class-transformer'
