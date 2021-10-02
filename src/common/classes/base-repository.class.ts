@@ -4,6 +4,9 @@ import { PaginationParams } from '@common/types'
 interface CreatePaginatedListPayload<T> {
   page: number
   pageSize: number
+  /**
+   * total of items in the query
+   */
   count: number
   data: T[]
 }
@@ -18,15 +21,21 @@ export abstract class BaseRepository<T> {
   }
 
   protected getPageSize(pageSize?: number): number {
-    return pageSize || this.defaultPageSize
+    return pageSize
+      ? pageSize < 1
+        ? this.defaultPageSize
+        : pageSize
+      : this.defaultPageSize
   }
 
   protected createPaginationPayload({
     data,
-    page,
-    pageSize,
+    page: _page,
+    pageSize: _pageSize,
     count
   }: CreatePaginatedListPayload<T>): PaginatedList<T> {
+    const pageSize = this.getPageSize(_pageSize)
+    const page = this.getPage(_page)
     const pageCount = Math.ceil(count / pageSize)
     return {
       count,
