@@ -5,6 +5,7 @@ import { createMock } from '@golevelup/nestjs-testing'
 import faker from 'faker'
 import { InvalidTokenError, UnauthenticatedError, ForbiddenError } from '@common/errors'
 import { JUser, Role } from '@common/types'
+import { TEST_ROLE } from '@common/utils'
 import { AuthGuard } from '../auth.guard'
 
 describe('AuthGuard', () => {
@@ -49,7 +50,7 @@ describe('AuthGuard', () => {
       {
         user: {
           email: faker.internet.email(),
-          role: Role.OTHER
+          role: TEST_ROLE
         } as JUser
       }
     ])
@@ -65,7 +66,7 @@ describe('AuthGuard', () => {
       {
         user: {
           email: faker.internet.email(),
-          role: Role.OTHER
+          role: TEST_ROLE
         } as JUser
       }
     ])

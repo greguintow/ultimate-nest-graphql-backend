@@ -3,6 +3,7 @@
 import { ROUTE_ARGS_METADATA } from '@nestjs/common/constants'
 import faker from 'faker'
 import { plainToClass } from 'class-transformer'
+import { Role } from '@common/types'
 import { User } from '@modules/users/models'
 
 export const createTestUser = (params?: Partial<User>): User => {
@@ -17,6 +18,8 @@ export const createTestUser = (params?: Partial<User>): User => {
     ...params
   })
 }
+
+export const TEST_ROLE = 'TEST' as Role
 
 export function getParamDecoratorFactory(decorator: Function) {
   class TestDecorator {
