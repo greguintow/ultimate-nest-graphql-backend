@@ -18,9 +18,11 @@ export interface JUser {
   role: Role
 }
 
+export type TokenStatus = 'valid' | 'invalid' | 'expired'
+
 export interface Context extends ExpressContext {
   req: Request & { i18nLang?: string }
   user?: JUser | null
-  isTokenInvalid: boolean
+  tokenStatus: TokenStatus
   i18nLang?: string
 }

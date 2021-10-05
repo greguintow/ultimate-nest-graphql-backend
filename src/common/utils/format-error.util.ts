@@ -69,6 +69,12 @@ export async function formatError({
         }
       }
       return error
+    case 'invalid_token':
+      const message = await translate(`error.invalid_token.${error.metadata.status}`)
+      return {
+        ...error,
+        message: message || defaultMessage
+      }
     default:
       return {
         ...error,

@@ -4,7 +4,7 @@ import { Reflector } from '@nestjs/core'
 import { createMock } from '@golevelup/nestjs-testing'
 import faker from 'faker'
 import { InvalidTokenError, UnauthenticatedError, ForbiddenError } from '@common/errors'
-import { JUser, Role } from '@common/types'
+import { Context, JUser, Role } from '@common/types'
 import { TEST_ROLE } from '@common/utils'
 import { AuthGuard } from '../auth.guard'
 
@@ -32,7 +32,11 @@ describe('AuthGuard', () => {
 
   it('should throw an error if token is invalid', async () => {
     const context = createMock<ExecutionContext>()
-    context.getArgs.mockReturnValue([undefined, undefined, { isTokenInvalid: true }])
+    context.getArgs.mockReturnValue([
+      undefined,
+      undefined,
+      { tokenStatus: 'invalid' } as Partial<Context>
+    ])
     await expect(guard.canActivate(context)).rejects.toThrow(InvalidTokenError)
   })
 

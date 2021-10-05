@@ -9,6 +9,8 @@
   "invalid_password": "Senha inválida",
   "unauthenticated": "Você precisa estar autenticado para realizar essa operação",
   "invalid_token": "O token recebido é inválido",
+  "invalid_token.invalid": "O token recebido é inválido",
+  "invalid_token.expired": "O token recebido está expirado",
   "forbidden": "Você não está autorizado para realizar essa ação",
   "invalid_string": "Precisa ser uma string",
   "invalid_float": "Precisa ser um float",

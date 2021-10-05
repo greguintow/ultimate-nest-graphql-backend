@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
-import { JUser, Role } from '@common/types'
+import { TokenExpiredError } from 'jsonwebtoken'
+import { JUser, Role, TokenStatus } from '@common/types'
 import { User, UserLogin } from '../models'
 
 export interface GetUserFromTokenResponse {
   user: JUser | null
-  isTokenInvalid: boolean
+  tokenStatus: TokenStatus
 }
 
 @Injectable()
@@ -32,13 +33,17 @@ export class AuthService {
 
   verifyToken(token: string | null): GetUserFromTokenResponse {
     if (!token) {
-      return { user: null, isTokenInvalid: false }
+      return { user: null, tokenStatus: 'invalid' }
     }
     try {
       const user = this.jwtService.verify(token)
-      return { user, isTokenInvalid: false }
+      return { user, tokenStatus: 'valid' }
     } catch (err) {
-      return { user: null, isTokenInvalid: true }
+      let tokenStatus: TokenStatus = 'invalid'
+      if (err instanceof TokenExpiredError) {
+        tokenStatus = 'expired'
+      }
+      return { user: null, tokenStatus }
     }
   }
 

@@ -11,9 +11,13 @@ export class AuthGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const ctx = GqlExecutionContext.create(context).getContext() as Context
 
-    const { user, isTokenInvalid } = ctx
+    const { user, tokenStatus } = ctx
 
-    if (isTokenInvalid) throw new InvalidTokenError()
+    if (tokenStatus && tokenStatus !== 'valid') {
+      throw new InvalidTokenError({
+        status: tokenStatus
+      })
+    }
 
     if (!user) throw new UnauthenticatedError()
 

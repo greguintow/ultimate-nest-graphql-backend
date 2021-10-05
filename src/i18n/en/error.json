@@ -9,6 +9,8 @@
   "invalid_password": "Password invalid",
   "unauthenticated": "You need to be authenticated to perform this action",
   "invalid_token": "The provided token is invalid",
+  "invalid_token.invalid": "The provided token is invalid",
+  "invalid_token.expired": "The provided token is expired",
   "forbidden": "You are not authorized to perform this action",
   "invalid_string": "Must be a string",
   "invalid_float": "Must be a float",

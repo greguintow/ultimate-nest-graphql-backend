@@ -1,7 +1,10 @@
 import { JwtService } from '@nestjs/jwt'
 import { Test } from '@nestjs/testing'
+import faker from 'faker'
+import jwt from 'jsonwebtoken'
 import { createTestUser } from '@common/utils'
 import { JUser, Role } from '@common/types'
+import { SECRET } from '@common/constants/config'
 import { jwtModule } from '@modules/global-configs'
 import { AuthService } from '../auth.service'
 
@@ -48,23 +51,38 @@ describe('AuthService', () => {
   })
 
   describe('verifyToken', () => {
-    it('should return isTokenInvalid false with no user', () => {
+    it('should return tokenStatus invalid with no user', () => {
       const token = null
-      const { isTokenInvalid, user } = authService.verifyToken(token)
-      expect(isTokenInvalid).toBe(false)
+      const { tokenStatus, user } = authService.verifyToken(token)
+      expect(tokenStatus).toBe('invalid')
       expect(user).toBe(null)
     })
-    it('should return isTokenInvalid true', () => {
+    it('should return tokenStatus invalid', () => {
       const token = 'anytoken'
-      const { isTokenInvalid, user } = authService.verifyToken(token)
-      expect(isTokenInvalid).toBe(true)
+      const { tokenStatus, user } = authService.verifyToken(token)
+      expect(tokenStatus).toBe('invalid')
       expect(user).toBe(null)
+    })
+    it('should return tokenStatus expired', () => {
+      const user = createTestUser()
+      const token = jwt.sign(
+        {
+          id: user.id,
+          email: user.email,
+          role: Role.USER,
+          exp: faker.date.past().getTime() / 1000
+        },
+        SECRET as string
+      )
+      const { tokenStatus, user: resUser } = authService.verifyToken(token)
+      expect(tokenStatus).toBe('expired')
+      expect(resUser).toBe(null)
     })
     it('should return payload successfully', () => {
       const user = createTestUser()
       const token = authService.generateUserToken(user)
-      const { isTokenInvalid, user: resUser } = authService.verifyToken(token)
-      expect(isTokenInvalid).toBe(false)
+      const { tokenStatus, user: resUser } = authService.verifyToken(token)
+      expect(tokenStatus).toBe('valid')
       expect(resUser).toBeTruthy()
     })
   })
@@ -112,15 +130,15 @@ describe('AuthService', () => {
       const token = authService.generateUserToken(user)
       const res = authService.getTokenFromHeader(`Bearer ${token}`)
       expect(res.user).toBeTruthy()
-      expect(res.isTokenInvalid).toBe(false)
+      expect(res.tokenStatus).toBe('valid')
     })
     it('should not return a successful payload', () => {
       const res = authService.getTokenFromHeader('any')
-      expect(res).toEqual({ user: null, isTokenInvalid: false })
+      expect(res).toEqual({ user: null, tokenStatus: 'invalid' })
     })
-    it('should return isTokenInvalid true', () => {
+    it('should return tokenStatus invalid', () => {
       const res = authService.getTokenFromHeader('Bearer something')
-      expect(res).toEqual({ user: null, isTokenInvalid: true })
+      expect(res).toEqual({ user: null, tokenStatus: 'invalid' })
     })
   })
 })
