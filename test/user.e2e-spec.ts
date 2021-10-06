@@ -1,6 +1,6 @@
 import { INestApplication } from '@nestjs/common'
 import { Test, TestingModule } from '@nestjs/testing'
-import request from 'supertest'
+import supertest from 'supertest'
 import jwt from 'jsonwebtoken'
 import faker from 'faker'
 import { Role } from '@common/types'
@@ -26,6 +26,7 @@ describe('UserResolver (e2e)', () => {
   let app: INestApplication
   let prisma: PrismaService
   let userLogin: UserLogin
+  let request: () => supertest.Test
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -35,15 +36,14 @@ describe('UserResolver (e2e)', () => {
     app = moduleFixture.createNestApplication()
     await app.init()
     prisma = app.get(PrismaService)
+    request = () => supertest(app.getHttpServer()).post(gql)
 
-    const result = await request(app.getHttpServer())
-      .post(gql)
-      .send({
-        query: SIGN_UP_USER,
-        variables: {
-          input: signUpInput
-        }
-      })
+    const result = await request().send({
+      query: SIGN_UP_USER,
+      variables: {
+        input: signUpInput
+      }
+    })
     userLogin = result.body?.data?.signUp
   })
 
@@ -55,8 +55,7 @@ describe('UserResolver (e2e)', () => {
 
   describe('me', () => {
     it('should return the user successfully', () => {
-      return request(app.getHttpServer())
-        .post(gql)
+      return request()
         .send({ query: GET_USER })
         .set('Authorization', `Bearer ${userLogin.token}`)
         .expect(200)
@@ -65,8 +64,7 @@ describe('UserResolver (e2e)', () => {
         })
     })
     it('should return token is invalid', () => {
-      return request(app.getHttpServer())
-        .post(gql)
+      return request()
         .send({ query: GET_USER })
         .expect(200)
         .expect(res => {
@@ -85,8 +83,7 @@ describe('UserResolver (e2e)', () => {
         },
         SECRET as string
       )
-      return request(app.getHttpServer())
-        .post(gql)
+      return request()
         .send({ query: GET_USER })
         .set('Authorization', `Bearer ${token}`)
         .expect(200)
@@ -99,8 +96,7 @@ describe('UserResolver (e2e)', () => {
 
   describe('login', () => {
     it('should login successfully', () => {
-      return request(app.getHttpServer())
-        .post(gql)
+      return request()
         .send({ query: LOGIN_USER, variables: { input: loginInput } })
         .expect(200)
         .expect(res => {
@@ -108,8 +104,7 @@ describe('UserResolver (e2e)', () => {
         })
     })
     it('should return auth invalid in email field', () => {
-      return request(app.getHttpServer())
-        .post(gql)
+      return request()
         .send({
           query: LOGIN_USER,
           variables: {
@@ -126,8 +121,7 @@ describe('UserResolver (e2e)', () => {
         })
     })
     it('should return auth invalid in password field', () => {
-      return request(app.getHttpServer())
-        .post(gql)
+      return request()
         .send({
           query: LOGIN_USER,
           variables: {
@@ -152,8 +146,7 @@ describe('UserResolver (e2e)', () => {
         email: 'something@something.com',
         password: '@Test123'
       }
-      return request(app.getHttpServer())
-        .post(gql)
+      return request()
         .send({
           query: SIGN_UP_USER,
           variables: {
@@ -167,8 +160,7 @@ describe('UserResolver (e2e)', () => {
         })
     })
     it('should return object already exists error', () => {
-      return request(app.getHttpServer())
-        .post(gql)
+      return request()
         .send({
           query: SIGN_UP_USER,
           variables: {
