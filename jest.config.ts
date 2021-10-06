@@ -1,4 +1,4 @@
-import type { Config } from '@jest/types'
+import { InitialOptionsTsJest } from 'ts-jest/dist/types'
 import { pathsToModuleNameMapper } from 'ts-jest/utils'
 import { compilerOptions } from './tsconfig.json'
 
@@ -28,4 +28,4 @@ export default {
   coverageDirectory: './coverage',
   clearMocks: true,
   moduleNameMapper
-} as Config.InitialOptions
+} as InitialOptionsTsJest
