@@ -4,6 +4,8 @@ RUN apk add --no-cache bash
 
 RUN touch /root/.bashrc | echo "PS1='\w\$ '" >> /root/.bashrc
 
-WORKDIR /home/node/app
+WORKDIR /usr/src/app
 
-EXPOSE 5005
+EXPOSE 7100
+
+ENTRYPOINT [ "sh", "./.docker/entrypoint.dev.sh" ]

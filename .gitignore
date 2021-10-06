@@ -42,3 +42,7 @@ package-lock.json
 # System Files
 .DS_Store
 Thumbs.db
+
+.docker/**/*
+!.docker/entrypoint.sh
+!.docker/entrypoint.dev.sh

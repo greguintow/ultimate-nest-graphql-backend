@@ -10,7 +10,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe())
 
-  const port = process.env.PORT || 5005
+  const port = process.env.PORT || 7100
 
   await app.listen(port, () => {
     Logger.log(`Server running at: http://localhost:${port}/graphql`)
