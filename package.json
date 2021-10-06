@@ -2,7 +2,11 @@
   "name": "ultimate-nest-graphql-backend",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": {
+    "name": "Greg Teixeira",
+    "email": "greg.teixeira123@gmail.com",
+    "url": "https://github.com/greguintow"
+  },
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
