@@ -1,6 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql'
 import { IsEmail, IsString, MinLength } from 'class-validator'
-import { IsValidPassword } from '@common/decorators'
+import { IsValidPassword } from '@common/validators'
 
 @InputType('SignUpInput')
 export class SignUpDto {
