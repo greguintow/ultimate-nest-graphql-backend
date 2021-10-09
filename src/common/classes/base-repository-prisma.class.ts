@@ -17,6 +17,7 @@ export abstract class BaseRepositoryPrisma<
   }
 
   protected async exists(where?: AllPrismaWhereInput[U]): Promise<boolean> {
+    // @ts-ignore
     const count = await this.prismaService[this.table].count({
       where
     })
