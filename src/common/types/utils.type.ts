@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma } from '@modules/prisma'
+import { PrismaClient, Prisma, PrismaPromise } from '@modules/prisma'
 
 export type Obj = { [key: string]: any }
 
@@ -27,7 +27,7 @@ export type PrismaTables = keyof GetDelegate<PrismaClient>
 
 export type GetModelType<T extends PrismaTables> = ReturnType<
   PrismaClient[T]['create']
-> extends Prisma.Prisma__UserClient<infer U>
+> extends PrismaPromise<infer U>
   ? U
   : never
 
