@@ -1,6 +1,10 @@
 node_modules
-yarn-debug.log
-debug.log
+*.log
 dist
 *.tsbuildinfo
 coverage
+.dockerignore
+Dockerfile
+.git
+.gitignore
+./test
