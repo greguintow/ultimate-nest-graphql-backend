@@ -12,7 +12,7 @@ export class UserResolver {
   @Query(() => User)
   @RequiresUserAuth()
   me(@AuthUser() user: JUser) {
-    return this.userService.getUserByEmail(user.email)
+    return this.userService.getUserById(user.id)
   }
 
   @Mutation(() => UserLogin)

@@ -1,15 +1,14 @@
 import { Injectable } from '@nestjs/common'
-import { CommandBus } from '@nestjs/cqrs'
-import { LoginCommand, SignUpCommand } from '../cqrs'
+import { CommandBus, QueryBus } from '@nestjs/cqrs'
+import { LoginCommand, SignUpCommand, GetUserByIdQuery } from '../cqrs'
 import { LoginDto, SignUpDto } from '../dto'
-import { UserLogin } from '../models'
-import { UserRepository } from '../repositories'
+import { UserLogin, User } from '../models'
 
 @Injectable()
 export class UserService {
   constructor(
     private readonly commandBus: CommandBus,
-    private readonly userRepository: UserRepository
+    private readonly queryBus: QueryBus
   ) {}
 
   signUp(input: SignUpDto): Promise<UserLogin> {
@@ -20,5 +19,7 @@ export class UserService {
     return this.commandBus.execute<LoginCommand, UserLogin>(new LoginCommand(input))
   }
 
-  getUserByEmail = this.userRepository.getByEmail.bind(this.userRepository)
+  getUserById(userId: string): Promise<User> {
+    return this.queryBus.execute<GetUserByIdQuery, User>(new GetUserByIdQuery(userId))
+  }
 }
