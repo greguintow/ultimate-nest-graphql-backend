@@ -9,7 +9,9 @@
     "airbnb-typescript/base",
     "plugin:import/typescript",
     "prettier",
-    "plugin:jest/recommended"
+    "plugin:jest/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -49,6 +51,7 @@
     "no-case-declarations": "off",
     "object-shorthand": "error",
     "no-template-curly-in-string": "error",
+    "max-classes-per-file": "off",
     "prefer-template": "error",
     "no-shadow": "off",
     "no-plusplus": [
@@ -82,6 +85,12 @@
         "avoidEscape": false
       }
     ],
+    "space-in-parens": ["error", "never"],
+    "space-unary-ops": ["error", { "words": true, "nonwords": false }],
+    "keyword-spacing": ["error", { "before": true, "after": true }],
+    "space-before-blocks": ["error", "always"],
+    "no-trailing-spaces": "error",
+    "no-multi-spaces": "error",
     "@typescript-eslint/no-parameter-properties": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
@@ -89,6 +98,7 @@
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-implicity-any": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-object-literal-type-assertion": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/ban-ts-ignore": "off",
@@ -101,6 +111,13 @@
     "@typescript-eslint/explicit-member-accessibility": "off",
     "@typescript-eslint/no-shadow": ["error"],
     "@typescript-eslint/semi": ["error", "never"],
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/unbound-method": "off",
+    "@typescript-eslint/no-unsafe-return": "off",
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
     "import/no-unresolved": "error",
     "import/extensions": [
       "error",
