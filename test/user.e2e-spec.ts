@@ -4,7 +4,7 @@ import supertest from 'supertest'
 import jwt from 'jsonwebtoken'
 import faker from 'faker'
 import { Role } from '@common/types'
-import { SECRET } from '@common/constants/config'
+import { SECRET } from '@common/constants'
 import { PrismaService } from '@modules/prisma'
 import { UserLogin } from '@modules/users/models'
 import { AppModule } from '../src/app.module'
@@ -169,10 +169,7 @@ describe('UserResolver (e2e)', () => {
         })
         .expect(200)
         .expect(res => {
-          expect(res.body).toHaveProperty(
-            'errors.0.extensions.code',
-            'object_already_exists'
-          )
+          expect(res.body).toHaveProperty('errors.0.extensions.code', 'object_already_exists')
           expect(res.body).toHaveProperty('errors.0.extensions.metadata.field', 'email')
         })
     })

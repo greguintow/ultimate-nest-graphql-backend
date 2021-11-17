@@ -4,7 +4,7 @@ import faker from 'faker'
 import jwt from 'jsonwebtoken'
 import { createTestUser } from '@common/utils'
 import { JUser, Role } from '@common/types'
-import { SECRET } from '@common/constants/config'
+import { SECRET } from '@common/constants'
 import { jwtModule } from '@modules/global-configs'
 import { AuthService } from '../auth.service'
 

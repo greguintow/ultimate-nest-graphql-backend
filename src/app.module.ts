@@ -13,7 +13,7 @@ import {
   I18nService,
   setI18nGlobalOptions
 } from 'nestjs-i18n'
-import { AUTH_HEADER, IN_PROD } from '@common/constants/config'
+import { AUTH_HEADER, IN_PROD } from '@common/constants'
 import { formatError } from '@common/utils'
 import { Context } from '@common/types'
 import { DomainErrorFilter } from '@common/filters'
@@ -66,9 +66,7 @@ setI18nGlobalOptions({
           },
           debug: !IN_PROD,
           formatError: async (error, _requestContext) => {
-            const requestContext = _requestContext as
-              | GraphQLRequestContext<Context>
-              | undefined
+            const requestContext = _requestContext as GraphQLRequestContext<Context> | undefined
 
             const lang = requestContext?.context?.req?.i18nLang || 'en'
 
