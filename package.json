@@ -43,7 +43,7 @@
     "apollo-server-express": "npm:@greguintow/apollo-server-express@latest",
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.4.0",
-    "class-validator": "^0.13.1",
+    "class-validator": "npm:@greguintow/class-validator@0.13.7",
     "graphql": "^15.5.0",
     "nestjs-i18n": "npm:@greguintow/nestjs-i18n",
     "reflect-metadata": "^0.1.13",
