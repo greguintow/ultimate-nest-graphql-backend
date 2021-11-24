@@ -1,9 +1,9 @@
-import { CommandBus } from '@nestjs/cqrs'
+import { CommandBus, QueryBus } from '@nestjs/cqrs'
 import { Test } from '@nestjs/testing'
 import faker from 'faker'
 import { when } from 'jest-when'
-import { createTestUser } from '@common/utils'
-import { LoginCommand, SignUpCommand } from '@modules/users/cqrs'
+import { createTestUser } from '@modules/users/fixtures'
+import { GetUserByIdQuery, LoginCommand, SignUpCommand } from '@modules/users/cqrs'
 import { UserRepository } from '@modules/users/repositories'
 import { UserService } from '../user.service'
 
@@ -14,19 +14,23 @@ describe('UserService', () => {
 
   beforeEach(async () => {
     const executeFn = jest.fn()
-    when(executeFn)
-      .calledWith(expect.any(SignUpCommand))
-      .mockResolvedValue({ token: 'token', user })
+    when(executeFn).calledWith(expect.any(SignUpCommand)).mockResolvedValue({ token: 'token', user })
 
-    when(executeFn)
-      .calledWith(expect.any(LoginCommand))
-      .mockResolvedValue({ token: 'token', user })
+    when(executeFn).calledWith(expect.any(LoginCommand)).mockResolvedValue({ token: 'token', user })
+
+    when(executeFn).calledWith(expect.any(GetUserByIdQuery)).mockResolvedValue(user)
 
     const module = await Test.createTestingModule({
       providers: [
         UserService,
         {
           provide: CommandBus,
+          useValue: {
+            execute: executeFn
+          }
+        },
+        {
+          provide: QueryBus,
           useValue: {
             execute: executeFn
           }
@@ -68,9 +72,9 @@ describe('UserService', () => {
     })
   })
 
-  describe('getUserByEmail', () => {
+  describe('getUserById', () => {
     it('should return the user', async () => {
-      const res = await userService.getUserByEmail(faker.internet.email())
+      const res = await userService.getUserById(faker.datatype.uuid())
       expect(res).toEqual(user)
     })
   })
