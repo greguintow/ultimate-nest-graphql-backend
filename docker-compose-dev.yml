@@ -4,20 +4,19 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
-    container_name: template-api
-    image: template-api
-    # Uncomment this line in case you are in M1
-    # platform: linux/amd64
+      dockerfile: Dockerfile.dev
+    container_name: template-api-dev
+    image: template-api-dev
+    platform: linux/amd64
     ports:
       - '4000:4000'
+    volumes:
+      - .:/usr/src/app
     networks:
       - 'app-network'
     depends_on:
       - db
     environment:
-      - NODE_ENV=development
-      - PORT=4000
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/template-api?schema=public
 
   db:

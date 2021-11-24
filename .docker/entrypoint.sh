@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /usr/src/app
+cd /home/node/app
 
 yarn db:deploy
-yarn start:prod
+dumb-init node dist/main.js
