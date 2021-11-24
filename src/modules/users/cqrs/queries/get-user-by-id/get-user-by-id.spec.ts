@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing'
 import faker from 'faker'
-import { createTestUser } from '@common/test'
+import { createTestUser } from '@modules/users/fixtures'
 import { UserRepository } from '@modules/users/repositories'
 import { GetUserByIdHandler } from './get-user-by-id.handler'
 
