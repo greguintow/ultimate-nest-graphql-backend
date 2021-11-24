@@ -30,7 +30,10 @@
     "studio:test": "env-cmd -f .env.test prisma studio",
     "db:migrate": "prisma migrate dev",
     "prisma:migrate:init": "prisma migrate dev --name init",
-    "db:deploy": "prisma migrate deploy"
+    "dev:docker:up": "docker-compose -f docker-compose-dev.yml up -d",
+    "db:deploy": "prisma migrate deploy",
+    "postinstall": "husky install",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@nestjs/common": "^8.2.3",
@@ -74,8 +77,10 @@
     "eslint-plugin-prettier": "4.0.0",
     "faker": "^5.5.3",
     "git-commit-msg-linter": "^3.1.0",
+    "husky": "^7.0.4",
     "jest": "27.3.1",
     "jest-when": "^3.4.2",
+    "lint-staged": "^12.1.2",
     "prettier": "^2.4.1",
     "prisma": "^3.5.0",
     "rimraf": "^3.0.2",
