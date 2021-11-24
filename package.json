@@ -22,7 +22,7 @@
     "test:watch": "jest --verbose --watch",
     "test:cov": "jest --verbose --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "yarn test:docker:up && env-cmd -f .env.test yarn prisma:migrate:init && env-cmd -f .env.test jest --config ./test/jest-e2e.config.ts && yarn test:docker:down",
+    "test:e2e": "yarn test:docker:up && sleep 2 && env-cmd -f .env.test yarn prisma:migrate:init && env-cmd -f .env.test jest --config ./test/jest-e2e.config.ts --coverage && yarn test:docker:down",
     "test:docker:up": "docker-compose -f docker-compose-test.yml up -d",
     "test:docker:down": "docker-compose -f docker-compose-test.yml down",
     "prisma:generate": "prisma generate",

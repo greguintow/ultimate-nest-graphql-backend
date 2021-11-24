@@ -16,8 +16,10 @@ export default {
     '.fixture.ts',
     '.module.ts',
     'index.ts',
+    '.spec.ts',
     'main.ts',
-    '.type.ts'
+    '.type.ts',
+    '/test'
   ],
   preset: 'ts-jest',
   testEnvironment: 'node',
