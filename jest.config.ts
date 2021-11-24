@@ -12,18 +12,25 @@ export default {
   transform: {
     '.+\\.ts$': 'ts-jest'
   },
+  collectCoverageFrom: ['**/*.ts'],
   coveragePathIgnorePatterns: [
     '/node_modules',
+    '/constants',
     '.fixture.ts',
     '.command.ts',
+    '.module.ts',
     '.event.ts',
     '.dto.ts',
+    '.args.ts',
     '.query.ts',
     '.error.ts',
+    'index.ts',
+    '.resolver.ts',
+    'main.ts',
+    '.type.ts',
     '.model.ts'
   ],
   testEnvironment: 'node',
-  collectCoverage: true,
   detectOpenHandles: true,
   coverageDirectory: './coverage',
   clearMocks: true,

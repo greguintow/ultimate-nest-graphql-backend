@@ -1,14 +1,21 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "declaration": false,
+    "sourceMap": true,
+    "inlineSources": true,
+    "sourceRoot": "./"
   },
   "exclude": [
     "dist",
     "test",
     "coverage",
+    "coverage-e2e",
     "**/*.spec.ts",
     "**/*.fixture.ts",
-    "jest.config.ts"
+    "fixtures",
+    "jest.config.ts",
+    "**/test.util.ts"
   ]
 }

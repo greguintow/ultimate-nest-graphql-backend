@@ -9,11 +9,22 @@ const moduleNameMapper = pathsToModuleNameMapper(compilerOptions.paths, {
 export default {
   moduleFileExtensions: ['js', 'json', 'ts'],
   rootDir: '../',
+  collectCoverageFrom: ['src/**/*.ts'],
+  coveragePathIgnorePatterns: [
+    '/node_modules',
+    '/constants',
+    '.fixture.ts',
+    '.module.ts',
+    'index.ts',
+    'main.ts',
+    '.type.ts'
+  ],
   preset: 'ts-jest',
   testEnvironment: 'node',
   testRegex: '.e2e-spec.ts$',
   transform: {
     '^.+\\.(t|j)s$': 'ts-jest'
   },
-  moduleNameMapper
+  moduleNameMapper,
+  coverageDirectory: './coverage-e2e'
 } as InitialOptionsTsJest

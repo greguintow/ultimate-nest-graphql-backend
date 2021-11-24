@@ -18,7 +18,7 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest --verbose",
+    "test": "jest --verbose --coverage",
     "test:watch": "jest --verbose --watch",
     "test:cov": "jest --verbose --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",

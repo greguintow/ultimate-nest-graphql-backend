@@ -21,16 +21,13 @@ node_modules
 .eslintcache
 
 # IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+.vscode
 
 # misc
 /.sass-cache
 /connect.lock
 /coverage
+/coverage-e2e
 /libpeerconnection.log
 npm-debug.log
 yarn-error.log
