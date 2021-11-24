@@ -53,7 +53,7 @@ setI18nGlobalOptions({
     }),
     GraphQLModule.forRootAsync({
       imports: [UserModule],
-      useFactory: async (authService: AuthService, i18nService: I18nService) => {
+      useFactory: (authService: AuthService, i18nService: I18nService) => {
         return {
           cors: true,
           autoSchemaFile: true,

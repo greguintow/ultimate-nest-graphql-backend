@@ -24,7 +24,7 @@ describe('CryptService', () => {
     it('should encrypt string successfully', async () => {
       const str = faker.internet.password()
 
-      jest.spyOn(bcrypt, 'hash').mockImplementationOnce(async () => hashedStr)
+      jest.spyOn(bcrypt, 'hash').mockImplementationOnce(() => hashedStr)
       jest.spyOn(bcrypt, 'genSalt')
 
       const response = await cryptService.encrypt(str)
@@ -38,7 +38,7 @@ describe('CryptService', () => {
     it('should compare string successfully', async () => {
       const str = faker.internet.password()
 
-      jest.spyOn(bcrypt, 'compare').mockImplementationOnce(async () => true)
+      jest.spyOn(bcrypt, 'compare').mockImplementationOnce(() => true)
 
       const response = await cryptService.compare(str, hashedStr)
 

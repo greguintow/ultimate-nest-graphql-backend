@@ -1,5 +1,3 @@
-/* istanbul ignore file */
-
 import { ROUTE_ARGS_METADATA } from '@nestjs/common/constants'
 import { Role } from '@common/types'
 

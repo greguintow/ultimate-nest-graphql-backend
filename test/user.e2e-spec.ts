@@ -81,7 +81,7 @@ describe('UserResolver (e2e)', () => {
           role: Role.USER,
           exp: faker.date.past().getTime() / 1000
         },
-        SECRET as string
+        SECRET
       )
       return request()
         .send({ query: GET_USER })
