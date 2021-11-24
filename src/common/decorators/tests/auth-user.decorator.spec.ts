@@ -2,7 +2,7 @@ import { ExecutionContext } from '@nestjs/common'
 import faker from 'faker'
 import { createMock } from '@golevelup/nestjs-testing'
 import { JUser, Role } from '@common/types'
-import { getParamDecoratorFactory } from '@common/utils'
+import { getParamDecoratorFactory } from '@common/test'
 import { AuthUser } from '../auth-user.decorator'
 
 describe('AuthUser', () => {

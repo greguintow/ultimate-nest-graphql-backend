@@ -2,9 +2,9 @@ import { JwtService } from '@nestjs/jwt'
 import { Test } from '@nestjs/testing'
 import faker from 'faker'
 import jwt from 'jsonwebtoken'
-import { createTestUser } from '@common/utils'
 import { JUser, Role } from '@common/types'
 import { SECRET } from '@common/constants'
+import { createTestUser } from '@modules/users/fixtures'
 import { jwtModule } from '@modules/global-configs'
 import { AuthService } from '../auth.service'
 
@@ -72,7 +72,7 @@ describe('AuthService', () => {
           role: Role.USER,
           exp: faker.date.past().getTime() / 1000
         },
-        SECRET as string
+        SECRET
       )
       const { tokenStatus, user: resUser } = authService.verifyToken(token)
       expect(tokenStatus).toBe('expired')

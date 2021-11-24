@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
 import { Role } from '@common/types'
-import { TEST_ROLE } from '@common/utils'
+import { TEST_ROLE } from '@common/test'
 import { Roles } from '../roles.decorator'
 
 describe('Roles', () => {
