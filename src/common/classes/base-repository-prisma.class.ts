@@ -5,10 +5,7 @@ import { PrismaService } from '@modules/prisma'
 import { BaseRepository } from './base-repository.class'
 
 @Injectable()
-export abstract class BaseRepositoryPrisma<
-  T,
-  U extends PrismaTables
-> extends BaseRepository<T> {
+export abstract class BaseRepositoryPrisma<T, U extends PrismaTables> extends BaseRepository<T> {
   @Inject()
   protected readonly prismaService: PrismaService
 
@@ -59,11 +56,11 @@ export abstract class BaseRepositoryPrisma<
     return plainToClass(this.Model, obj) as V extends null ? null : T
   }
 
-  protected formatMany<V extends AllPrismaModels[U]>(obj: V[]): T[] {
-    if (!obj) {
-      return [] as T[]
+  protected formatMany<V extends AllPrismaModels[U]>(objArr: V[]): T[] {
+    if (!objArr) {
+      return []
     }
 
-    return obj.map(this.format) as T[]
+    return objArr.map(obj => this.format(obj))
   }
 }
