@@ -6,10 +6,7 @@ import { UserLogin, User } from '../models'
 
 @Injectable()
 export class UserService {
-  constructor(
-    private readonly commandBus: CommandBus,
-    private readonly queryBus: QueryBus
-  ) {}
+  constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) {}
 
   signUp(input: SignUpDto): Promise<UserLogin> {
     return this.commandBus.execute<SignUpCommand, UserLogin>(new SignUpCommand(input))

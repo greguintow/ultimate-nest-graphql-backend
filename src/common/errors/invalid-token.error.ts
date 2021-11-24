@@ -5,10 +5,7 @@ interface InvalidTokenErrorMetadata {
   status: Exclude<TokenStatus, 'valid'>
 }
 
-export class InvalidTokenError extends DomainError<
-  'invalid_token',
-  InvalidTokenErrorMetadata
-> {
+export class InvalidTokenError extends DomainError<'invalid_token', InvalidTokenErrorMetadata> {
   constructor(readonly metadata: InvalidTokenErrorMetadata) {
     super({
       name: 'InvalidToken',

@@ -12,10 +12,7 @@ import { isFunction } from './function.util'
  * export const CommandHandlers = getCqrsHandlers(exports)
  * ```
  */
-export const getCqrsHandlers = (
-  exportedValues: any,
-  searchStr: string = 'handler'
-): Provider[] => {
+export const getCqrsHandlers = (exportedValues: any, searchStr = 'handler'): Provider[] => {
   return Object.values(exportedValues).filter(
     handler => isFunction(handler) && new RegExp(searchStr, 'i').test(handler.name)
   ) as Provider[]

@@ -21,11 +21,7 @@ export abstract class BaseRepository<T> {
   }
 
   protected getPageSize(pageSize?: number): number {
-    return pageSize
-      ? pageSize < 1
-        ? this.defaultPageSize
-        : pageSize
-      : this.defaultPageSize
+    return pageSize ? (pageSize < 1 ? this.defaultPageSize : pageSize) : this.defaultPageSize
   }
 
   protected createPaginationPayload({

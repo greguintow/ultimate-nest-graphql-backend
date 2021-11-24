@@ -9,12 +9,8 @@ export interface FormatErrorParams {
   error: Errors
 }
 
-export async function formatError({
-  error,
-  translate
-}: FormatErrorParams): Promise<Errors> {
-  const defaultMessage =
-    (await translate(`error.${error.code}`, error.metadata)) || error.message
+export async function formatError({ error, translate }: FormatErrorParams): Promise<Errors> {
+  const defaultMessage = (await translate(`error.${error.code}`, error.metadata)) || error.message
   switch (error.code) {
     case 'object_already_exists':
       if (error.metadata.field === 'email' && error.metadata.objectType === 'User') {

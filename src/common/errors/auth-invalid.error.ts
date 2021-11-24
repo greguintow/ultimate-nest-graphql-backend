@@ -4,10 +4,7 @@ interface AuthInvalidErrorMetadata {
   field: 'email' | 'password'
 }
 
-export class AuthInvalidError extends DomainError<
-  'auth_invalid',
-  AuthInvalidErrorMetadata
-> {
+export class AuthInvalidError extends DomainError<'auth_invalid', AuthInvalidErrorMetadata> {
   constructor(readonly metadata: AuthInvalidErrorMetadata) {
     super({
       code: 'auth_invalid',
