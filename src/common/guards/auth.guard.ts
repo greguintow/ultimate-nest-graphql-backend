@@ -8,8 +8,8 @@ import { Context, Role } from '../types'
 export class AuthGuard implements CanActivate {
   constructor(private readonly reflector: Reflector) {}
 
-  async canActivate(context: ExecutionContext): Promise<boolean> {
-    const ctx = GqlExecutionContext.create(context).getContext() as Context
+  canActivate(context: ExecutionContext): boolean {
+    const ctx = GqlExecutionContext.create(context).getContext<Context>()
 
     const { user, tokenStatus } = ctx
 

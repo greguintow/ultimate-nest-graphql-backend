@@ -5,7 +5,7 @@ import { createMock } from '@golevelup/nestjs-testing'
 import faker from 'faker'
 import { InvalidTokenError, UnauthenticatedError, ForbiddenError } from '@common/errors'
 import { Context, JUser, Role } from '@common/types'
-import { TEST_ROLE } from '@common/utils'
+import { TEST_ROLE } from '@common/test'
 import { AuthGuard } from '../auth.guard'
 
 describe('AuthGuard', () => {
@@ -30,23 +30,27 @@ describe('AuthGuard', () => {
     expect(reflector).toBeDefined()
   })
 
-  it('should throw an error if token is invalid', async () => {
+  it('should throw an error if token is invalid', () => {
     const context = createMock<ExecutionContext>()
     context.getArgs.mockReturnValue([
       undefined,
       undefined,
       { tokenStatus: 'invalid' } as Partial<Context>
     ])
-    await expect(guard.canActivate(context)).rejects.toThrow(InvalidTokenError)
+    expect(() => {
+      guard.canActivate(context)
+    }).toThrowError(InvalidTokenError)
   })
 
-  it('should throw an error if user is not found', async () => {
+  it('should throw an error if user is not found', () => {
     const context = createMock<ExecutionContext>()
     context.getArgs.mockReturnValue([undefined, undefined, {}])
-    await expect(guard.canActivate(context)).rejects.toThrow(UnauthenticatedError)
+    expect(() => {
+      guard.canActivate(context)
+    }).toThrowError(UnauthenticatedError)
   })
 
-  it('should throw an error if user doesnt have the right role', async () => {
+  it('should throw an error if user doesnt have the right role', () => {
     const context = createMock<ExecutionContext>()
     context.getArgs.mockReturnValue([
       undefined,
@@ -59,10 +63,12 @@ describe('AuthGuard', () => {
       }
     ])
     jest.spyOn(reflector, 'get').mockReturnValue([Role.USER])
-    await expect(guard.canActivate(context)).rejects.toThrow(ForbiddenError)
+    expect(() => {
+      guard.canActivate(context)
+    }).toThrowError(ForbiddenError)
   })
 
-  it('should return true with auth if no role was defined', async () => {
+  it('should return true with auth if no role was defined', () => {
     const context = createMock<ExecutionContext>()
     context.getArgs.mockReturnValue([
       undefined,
@@ -74,10 +80,10 @@ describe('AuthGuard', () => {
         } as JUser
       }
     ])
-    await expect(guard.canActivate(context)).toBeTruthy()
+    expect(guard.canActivate(context)).toBeTruthy()
   })
 
-  it('should return true with auth specifying the role', async () => {
+  it('should return true with auth specifying the role', () => {
     const context = createMock<ExecutionContext>()
     context.getArgs.mockReturnValue([
       undefined,
@@ -90,6 +96,6 @@ describe('AuthGuard', () => {
       }
     ])
     jest.spyOn(reflector, 'get').mockReturnValue([Role.USER])
-    await expect(guard.canActivate(context)).toBeTruthy()
+    expect(guard.canActivate(context)).toBeTruthy()
   })
 })
