@@ -8,7 +8,7 @@ describe('GetUserByIdHandler', () => {
   let getUserByIdHandler: GetUserByIdHandler
   let userRepository: UserRepository
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module = await Test.createTestingModule({
       providers: [
         GetUserByIdHandler,
@@ -26,7 +26,7 @@ describe('GetUserByIdHandler', () => {
   })
 
   afterEach(() => {
-    jest.resetAllMocks()
+    jest.restoreAllMocks()
   })
 
   it('should be defined', () => {

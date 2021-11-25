@@ -27,7 +27,7 @@ describe('UserRepository', () => {
   let userRepository: UserRepository
   let prismaService: PrismaService
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module = await Test.createTestingModule({
       providers: [
         UserRepository,
@@ -45,7 +45,7 @@ describe('UserRepository', () => {
   })
 
   afterEach(() => {
-    jest.resetAllMocks()
+    jest.restoreAllMocks()
   })
 
   it('should be defined', () => {

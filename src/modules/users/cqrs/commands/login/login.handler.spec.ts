@@ -28,7 +28,7 @@ describe('LoginHandler', () => {
   let authService: AuthService
   let jwtService: JwtService
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module = await Test.createTestingModule({
       imports: [jwtModule],
       providers: [
@@ -57,7 +57,7 @@ describe('LoginHandler', () => {
   })
 
   afterEach(() => {
-    jest.resetAllMocks()
+    jest.restoreAllMocks()
   })
 
   it('should be defined', () => {

@@ -12,7 +12,7 @@ describe('AuthService', () => {
   let authService: AuthService
   let jwtService: JwtService
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module = await Test.createTestingModule({
       imports: [jwtModule],
       providers: [AuthService]
@@ -23,7 +23,7 @@ describe('AuthService', () => {
   })
 
   afterEach(() => {
-    jest.resetAllMocks()
+    jest.restoreAllMocks()
   })
 
   it('should be defined', () => {

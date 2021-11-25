@@ -8,7 +8,7 @@ const hashedStr = faker.datatype.string()
 describe('CryptService', () => {
   let cryptService: CryptService
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module = await Test.createTestingModule({
       providers: [CryptService]
     }).compile()

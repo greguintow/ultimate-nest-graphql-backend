@@ -25,7 +25,7 @@ describe('ValidationPipe', () => {
     data: ''
   }
 
-  beforeEach(() => {
+  beforeAll(() => {
     target = new ValidationPipe()
   })
 

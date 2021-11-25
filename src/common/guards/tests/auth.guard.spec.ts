@@ -12,7 +12,7 @@ describe('AuthGuard', () => {
   let guard: AuthGuard
   let reflector: Reflector
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module = await Test.createTestingModule({
       providers: [AuthGuard]
     }).compile()
@@ -22,7 +22,7 @@ describe('AuthGuard', () => {
   })
 
   afterEach(() => {
-    jest.resetAllMocks()
+    jest.restoreAllMocks()
   })
 
   it('should be defined', () => {

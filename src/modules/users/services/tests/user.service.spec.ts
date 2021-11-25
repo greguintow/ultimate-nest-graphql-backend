@@ -12,7 +12,7 @@ const user = createTestUser()
 describe('UserService', () => {
   let userService: UserService
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const executeFn = jest.fn()
     when(executeFn).calledWith(expect.any(SignUpCommand)).mockResolvedValue({ token: 'token', user })
 
