@@ -9,15 +9,13 @@ export type RemoveNeverProperties<T> = Omit<
   }[keyof T]
 >
 
-export type GetDelegate<T> = RemoveNeverProperties<
-  {
-    [K in keyof T]: T[K] extends { [key: string]: any }
-      ? T[K]['findUnique'] extends (...args: any[]) => any
-        ? K
-        : never
+export type GetDelegate<T> = RemoveNeverProperties<{
+  [K in keyof T]: T[K] extends { [key: string]: any }
+    ? T[K]['findUnique'] extends (...args: any[]) => any
+      ? K
       : never
-  }
->
+    : never
+}>
 
 export type RequiredNonNullable<T> = {
   [P in keyof T]-?: NonNullable<T[P]>
