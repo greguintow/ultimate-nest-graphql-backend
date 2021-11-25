@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { Inject, Injectable, Type } from '@nestjs/common'
 import { plainToClass } from 'class-transformer'
 import { AllPrismaModels, AllPrismaWhereInput, PrismaTables } from '@common/types'
