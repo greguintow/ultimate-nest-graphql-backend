@@ -48,6 +48,12 @@ export abstract class BaseRepositoryPrisma<T, U extends PrismaTables> extends Ba
     return exists
   }
 
+  async existsIds(ids: string[]): Promise<boolean> {
+    // @ts-ignore
+    const count = await this.prismaService[this.table].count({ where: { id: { in: ids } } })
+    return count === ids.length
+  }
+
   protected format<V extends AllPrismaModels[U] | null>(obj: V): V extends null ? null : T {
     if (!obj) {
       return null as V extends null ? null : T
