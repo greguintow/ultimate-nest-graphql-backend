@@ -2,7 +2,7 @@
 import { applyDecorators } from '@nestjs/common'
 import { IsString, Matches } from 'class-validator'
 import { ErrorCode } from '@common/types'
-import { createStringRequirements } from '@common/utils/regexps.util'
+import { createStringRequirements } from '@common/utils'
 
 /**
  * Regex to check if string has at least 8 characters and at least one symbol, number, uppercase and lowercase char
