@@ -52,10 +52,29 @@ describe('ValidationPipe', () => {
   })
 
   describe('formatErrors', () => {
-    it('should return normal if no constraints', () => {
+    it('should return empty if no constraints', () => {
       const error = ValidationPipe.formatErrors([{ property: 'name' }])
       expect(error).toBeInstanceOf(InvalidArgumentsError)
+      expect(error).toHaveProperty('metadata.fields', [])
+    })
+    it('should return value if constraints', () => {
+      const error = ValidationPipe.formatErrors([{ property: 'name', constraints: {} }])
+      expect(error).toBeInstanceOf(InvalidArgumentsError)
       expect(error).toHaveProperty('metadata.fields.0.message', [])
+    })
+  })
+
+  describe('getAllErrors', () => {
+    it('should strip errors', () => {
+      const errors = ValidationPipe.getAllErrors([
+        {
+          property: 'name',
+          children: [{ property: '0', children: [{ property: 'other', constraints: {} }] }],
+          constraints: {}
+        }
+      ])
+      expect(errors).toHaveLength(2)
+      expect(errors[1]).toEqual({ property: 'name.0.other', constraints: {} })
     })
   })
 })
