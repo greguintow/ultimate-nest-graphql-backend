@@ -33,7 +33,8 @@
     "dev:docker:up": "docker-compose -f docker-compose-dev.yml up -d",
     "db:deploy": "prisma migrate deploy",
     "postinstall": "husky install",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "init:dev": "docker-compose up -d db && cp .env.dev .env && yarn db:migrate"
   },
   "dependencies": {
     "@nestjs/common": "^8.2.3",
