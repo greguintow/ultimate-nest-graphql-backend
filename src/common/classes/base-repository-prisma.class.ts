@@ -62,11 +62,11 @@ export abstract class BaseRepositoryPrisma<T, U extends PrismaTables> extends Ba
     return plainToClass(this.Model, obj) as V extends null ? null : T
   }
 
-  protected formatMany<V extends AllPrismaModels[U]>(objArr: V[]): T[] {
-    if (!objArr) {
+  protected formatMany<V extends AllPrismaModels[U]>(arr: V[]): T[] {
+    if (!arr) {
       return []
     }
 
-    return objArr.map(obj => this.format(obj))
+    return arr.map(obj => this.format(obj))
   }
 }
