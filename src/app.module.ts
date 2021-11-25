@@ -1,7 +1,7 @@
 import path from 'path'
 import { Module } from '@nestjs/common'
 import { GraphQLModule } from '@nestjs/graphql'
-import { APP_FILTER } from '@nestjs/core'
+import { APP_FILTER, APP_PIPE } from '@nestjs/core'
 import { ExpressContext } from 'apollo-server-express'
 import { GraphQLRequestContext } from 'apollo-server-core'
 import {
@@ -18,6 +18,7 @@ import { formatError } from '@common/utils'
 import { Context } from '@common/types'
 import { DomainErrorFilter } from '@common/filters'
 import { InvalidArgumentsError } from '@common/errors'
+import { ValidationPipe } from '@common/pipes'
 import { PrismaModule } from '@modules/prisma'
 import { UserModule } from '@modules/users'
 import { AuthService } from '@modules/users/services'
@@ -189,6 +190,10 @@ setI18nGlobalOptions({
     {
       provide: APP_FILTER,
       useClass: DomainErrorFilter
+    },
+    {
+      provide: APP_PIPE,
+      useClass: ValidationPipe
     }
   ]
 })
