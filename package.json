@@ -22,7 +22,7 @@
     "test:watch": "jest --verbose --watch",
     "test:cov": "jest --verbose --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "yarn test:docker:up && sleep 2 && env-cmd -f .env.test yarn prisma:migrate:init && env-cmd -f .env.test jest --config ./test/jest-e2e.config.ts --coverage && yarn test:docker:down",
+    "test:e2e": "yarn test:docker:up && wait-on tcp:5431 && env-cmd -f .env.test yarn prisma:migrate:init && env-cmd -f .env.test jest --config ./test/jest-e2e.config.ts && yarn test:docker:down",
     "test:docker:up": "docker-compose -f docker-compose-test.yml up -d",
     "test:docker:down": "docker-compose -f docker-compose-test.yml down",
     "prisma:generate": "prisma generate",
@@ -89,6 +89,7 @@
     "ts-loader": "^9.2.6",
     "ts-node": "^10.4.0",
     "tsconfig-paths": "^3.12.0",
-    "typescript": "^4.5.2"
+    "typescript": "^4.5.2",
+    "wait-on": "^6.0.0"
   }
 }
