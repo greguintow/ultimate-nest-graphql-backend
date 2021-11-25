@@ -26,6 +26,7 @@ export default {
     '.error.ts',
     'index.ts',
     '.resolver.ts',
+    'test',
     'main.ts',
     '.type.ts',
     '.model.ts'
